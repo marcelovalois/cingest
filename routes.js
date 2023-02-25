@@ -9,7 +9,9 @@ const homeController = new HomeController();
 routes.get('/', homeController.index);
 
 // Rotas de OS
-routes.get('/register', homeController.register);
+routes.get('/register', homeController.insertIndex);
 routes.post('/register', homeController.insert);
+routes.get('/register/:id', homeController.editIndex);
+routes.post('/register/:id', homeController.edit);
 
 export default routes;

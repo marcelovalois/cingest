@@ -10,18 +10,22 @@
                 <h1 class="text-center">Ordem de Serviço</h1>
                 <p class="text-center lead">Crie ou edite a ordem de serviço.</p>
 
-                <form action="/register" method="POST" class="form-inline">
+                <% if (os._id) { %>
+                    <form action="/register/<%= os._id %>" method="POST">
+                <% } else { %>
+                    <form action="/register" method="POST">
+                <% } %>
                     <div class="form-group my-4">
                       <label for="InputTitle1">Título</label>
-                      <input type="text" class="form-control" id="InputTitle1" aria-describedby="emailHelp" placeholder="" name="title">
+                      <input value="<%= os.title %>" type="text" class="form-control" id="InputTitle1" aria-describedby="emailHelp" placeholder="" name="title">
                     </div>
                     <div class="form-group my-4">
                       <label for="InputCustomer1">Cliente</label>
-                      <input type="text" class="form-control" id="InputCustomer1" placeholder="" name="customer">
+                      <input value="<%= os.customer %>" type="text" class="form-control" id="InputCustomer1" placeholder="" name="customer">
                     </div>
                     <div class="form-group my-4">
                       <label for="InputResponsible1">Responsável</label>
-                      <input type="text" class="form-control" id="InputResponsible1" placeholder="" name="responsible">
+                      <input value="<%= os.responsible %>" type="text" class="form-control" id="InputResponsible1" placeholder="" name="responsible">
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </form>

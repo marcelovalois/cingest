@@ -24,6 +24,18 @@ class Home {
     if (this.errors.length > 0) return;
     this.os = await HomeModel.create(this.body);
   }
+
+  static async singleView(id) {
+    if (typeof id !== 'string') return;
+    const os = HomeModel.findById(id);
+    return os;
+  }
+
+  async edit(id) {
+    if (typeof id !== 'string') return;
+    if (this.errors.length > 0 ) return;
+    this.os = await HomeModel.findByIdAndUpdate(id, this.body, { new: true });
+  }
 }
 
 export default Home;
