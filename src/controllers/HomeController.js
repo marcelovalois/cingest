@@ -10,5 +10,23 @@ export default class HomeController {
         return;
     }
 
+    async register(req, res) {
+        res.render('osRegister', {});
+        return;
+    }
+
+    async insert(req, res) {
+        try {
+            const home = new Home(req.body);
+            home.insert();
+            res.redirect('/');
+            return;
+            
+        } catch (error) {
+            console.log(error);
+            res.render(404);
+        }
+    }
+
 }
 

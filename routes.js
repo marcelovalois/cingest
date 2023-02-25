@@ -8,4 +8,8 @@ const homeController = new HomeController();
 // Rotas da home
 routes.get('/', homeController.index);
 
+// Rotas de OS
+routes.get('/register', homeController.register);
+routes.post('/register', homeController.insert);
+
 export default routes;

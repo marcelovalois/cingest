@@ -12,11 +12,17 @@ const HomeModel = mongoose.model('Home', HomeSchema);
 class Home {
   constructor(body) {
     this.body = body;
+    this.errors = [];
+    this.os = null;
   }
 
   static async list() {
-    const result = await HomeModel.find();
-    return result;
+    return await HomeModel.find();
+  }
+
+  async insert() {
+    if (this.errors.length > 0) return;
+    this.os = await HomeModel.create(this.body);
   }
 }
 
