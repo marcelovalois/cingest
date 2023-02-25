@@ -9,6 +9,8 @@
                     <th>Início</th>
                     <th>Cliente</th>
                     <th>Responsável</th>
+                    <th>Editar</th>
+                    <th>Excluir</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,17 +20,11 @@
                       <td><%= os.start %></td>
                       <td><%= os.customer %></td>
                       <td><%= os.responsible %></td>
+                      <td><a href="/register/<%= os._id %>" class="text-decoration-none">Editar</a></td>
+                      <td><a href="/register/delete/<%= os._id %>" class="link-danger text-decoration-none">Excluir</a></td>
                   </tr>
                 <% }); %>
             </tbody>
-            <tfoot>
-                <tr>
-                  <th>Título</th>
-                  <th>Início</th>
-                  <th>Cliente</th>
-                  <th>Responsável</th>
-                </tr>
-            </tfoot>
           </table>
         </div>
       </div>

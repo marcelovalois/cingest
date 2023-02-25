@@ -36,6 +36,12 @@ class Home {
     if (this.errors.length > 0 ) return;
     this.os = await HomeModel.findByIdAndUpdate(id, this.body, { new: true });
   }
+
+  static async delete(id) {
+    if (typeof id !== 'string') return;
+    const os = await HomeModel.findOneAndDelete(id);
+    return os;
+  }
 }
 
 export default Home;

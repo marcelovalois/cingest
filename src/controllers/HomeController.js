@@ -50,7 +50,15 @@ export default class HomeController {
         }
     }
 
-    
+    async delete(req, res) {
+        if (!req.params.id) return res.render('404');
+
+        const os = await Home.delete(req.params.id);
+        if (!os) return res.render('404');
+        res.redirect('/');
+
+        return;
+    }
 
 }
 
