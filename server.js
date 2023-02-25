@@ -2,9 +2,19 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import routes from './routes.js';
-import * as path from 'path';
+import mongoose from 'mongoose';
+
+const connectionString = 'mongodb+srv://cingest:senhaMongo1234@cingest.pooile3.mongodb.net/?retryWrites=true&w=majority'
 
 const app = express();
+
+mongoose.set('strictQuery', false);
+mongoose.connect(connectionString)
+    .then(() => {
+        console.log('Connected to database');
+        app.emit('connected');
+    })
+    .catch(e => console.log(e));
 
 app.use(cors()); // Cors, utilizado para questões de segurança
 app.use(express.json()); // Middleware para o express aceitar requisições do tipo JSON
@@ -28,4 +38,6 @@ app.use((error, req, res, next) => {
     res.json({ error: error.message })
 })
 
-app.listen(3333, () => console.log('App listening on port 3333!'));
+app.on('connected', () => {
+    app.listen(3333, () => console.log('App listening on port 3333!'));
+})
