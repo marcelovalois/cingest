@@ -4,4 +4,21 @@
 
 <%- include('includes/datatable'); %>
 
+<div class="d-flex w-100 justify-content-center">
+    <button onclick="myFunction()" >Gerar relatório</button>
+</div>
+
+<script>
+    const myFunction = () => {
+        const supervisor = false;
+
+        if (supervisor) {
+            window.location.href = '/report/supervisor'
+        } else {
+            window.location.href = '/report'
+        }
+
+    }
+</script>
+
 <%- include('includes/footer'); %>

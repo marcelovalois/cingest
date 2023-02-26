@@ -3,6 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 const HomeSchema = new Schema({
   title: { type: String, required: true },
   start: { type: Date, default: Date.now },
+  end: { type: Date, default: new Date(1679802110000)},
   customer: String,
   responsible: String
 });
@@ -16,8 +17,8 @@ class Home {
     this.os = null;
   }
 
-  async list() {
-    return await HomeModel.find();
+  async list(filter) {
+    return await HomeModel.find(filter);
   }
 
   async insert() {
