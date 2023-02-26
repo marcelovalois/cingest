@@ -1,9 +1,12 @@
-import Home from "../models/HomeModel.js";
+import FactoryModel from "../models/FactoryModel.js";
+
+const HomeFactory = new FactoryModel('Home');
 
 export default class HomeController {
         
     async index(req, res) {
-        const serviceOrders = await Home.list();
+        const home = await HomeFactory.getModel();
+        const serviceOrders = await home.list();
         res.render('index', { 
             serviceOrders
         });
@@ -17,7 +20,7 @@ export default class HomeController {
 
     async insert(req, res) {
         try {
-            const home = new Home(req.body);
+            const home = await HomeFactory.getModel(req.body);
             await home.insert();
             res.redirect('/');
             return;
@@ -31,7 +34,8 @@ export default class HomeController {
     async editIndex(req, res) {
         if (!req.params.id) return res.render('404');
 
-        const os = await Home.singleView(req.params.id);
+        const home = await HomeFactory.getModel();
+        const os = await home.singleView(req.params.id);
 
         if (!os) return res.render('404');
         res.render('osRegister', { os })
@@ -41,7 +45,7 @@ export default class HomeController {
     async edit(req, res) {
         try {
             if (!req.params.id) return res.render('404');
-            const os = new Home(req.body);
+            const os = await HomeFactory.getModel(req.body);
             await os.edit(req.params.id);
             res.redirect('/');
         } catch (error) {
@@ -53,7 +57,8 @@ export default class HomeController {
     async delete(req, res) {
         if (!req.params.id) return res.render('404');
 
-        const os = await Home.delete(req.params.id);
+        const home = await HomeFactory.getModel();
+        const os = await home.delete(req.params.id);
         if (!os) return res.render('404');
         res.redirect('/');
 

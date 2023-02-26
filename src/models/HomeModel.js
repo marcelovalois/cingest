@@ -16,7 +16,7 @@ class Home {
     this.os = null;
   }
 
-  static async list() {
+  async list() {
     return await HomeModel.find();
   }
 
@@ -25,7 +25,7 @@ class Home {
     this.os = await HomeModel.create(this.body);
   }
 
-  static async singleView(id) {
+  async singleView(id) {
     if (typeof id !== 'string') return;
     const os = HomeModel.findById(id);
     return os;
@@ -37,7 +37,7 @@ class Home {
     this.os = await HomeModel.findByIdAndUpdate(id, this.body, { new: true });
   }
 
-  static async delete(id) {
+  async delete(id) {
     if (typeof id !== 'string') return;
     const os = await HomeModel.findOneAndDelete(id);
     return os;
