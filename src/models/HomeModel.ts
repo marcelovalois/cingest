@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import OSInterface from '../interface/OSInterface';
 
 const HomeSchema = new Schema({
   title: { type: String, required: true },
@@ -10,14 +11,19 @@ const HomeSchema = new Schema({
 
 const HomeModel = mongoose.model('Home', HomeSchema);
 
-class Home {
+class Home implements OSInterface {
+
+  private body: any;
+  private errors: any;
+  private os: any;
+
   constructor(body) {
     this.body = body;
     this.errors = [];
     this.os = null;
   }
 
-  async list(filter) {
+  async list(filter=null) {
     return await HomeModel.find(filter);
   }
 
@@ -40,7 +46,7 @@ class Home {
 
   async delete(id) {
     if (typeof id !== 'string') return;
-    const os = await HomeModel.findOneAndDelete(id);
+    const os = await HomeModel.findOneAndDelete({ '_id': id });
     return os;
   }
 }

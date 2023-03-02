@@ -1,4 +1,4 @@
-import FactoryModel from "../models/FactoryModel.js";
+import FactoryModel from "../models/FactoryModel";
 
 const HomeFactory = new FactoryModel('Home');
 

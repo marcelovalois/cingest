@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import OSInterface from '../interface/OSInterface';
 
 const UserSchema = new Schema({
   name: { type: String, required: true },
@@ -9,7 +10,12 @@ const UserSchema = new Schema({
 
 const UserModel = mongoose.model('User', UserSchema);
 
-class User {
+class User implements OSInterface {
+
+  private body: any;
+  private errors: any;
+  private os: any;
+
   constructor(body) {
     this.body = body;
     this.errors = [];
@@ -39,7 +45,7 @@ class User {
 
   async delete(id) {
     if (typeof id !== 'string') return;
-    const os = await UserModel.findOneAndDelete(id);
+    const os = await UserModel.findOneAndDelete({ '_id': id });
     return os;
   }
 }

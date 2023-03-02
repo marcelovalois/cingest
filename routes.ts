@@ -1,7 +1,7 @@
 import express from 'express';
 
-import HomeController from './src/controllers/HomeController.js';
-import { ReportController, SupervisorController } from './src/controllers/ReportController.js'
+import HomeController from './src/controllers/HomeController';
+import { ReportController, SupervisorController } from './src/controllers/ReportController'
 
 const routes = express.Router();
 const homeController = new HomeController();

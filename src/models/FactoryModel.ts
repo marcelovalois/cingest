@@ -1,8 +1,11 @@
-import Home from "./HomeModel.js";
-import User from "./UserModel.js";
+import Home from "./HomeModel";
+import User from "./UserModel";
 
 
 class FactoryModel {
+
+    private type: any;
+
     constructor(type) {
         this.type = type;
     }

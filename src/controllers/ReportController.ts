@@ -1,5 +1,5 @@
-import FactoryModel from "../models/FactoryModel.js";
-import sendMail from "../api/googleMail.js";
+import FactoryModel from "../models/FactoryModel";
+import sendMail from "../api/googleMail";
 
 const HomeFactory = new FactoryModel('Home');
 
@@ -13,7 +13,7 @@ export class ReportController {
             const service = JSON.stringify(serviceOrders);
             console.log('customerReport', service);
             
-            sendMail()
+            sendMail(service)
               .then((result) => console.log('Email sent...', result))
               .catch((error) => console.log(error.message));
 
@@ -26,6 +26,9 @@ export class ReportController {
 }
 
 export class SupervisorController {
+
+    private reportController: any;
+
     constructor(reportController) {
         this.reportController = reportController;
     }
@@ -38,7 +41,7 @@ export class SupervisorController {
             const service = JSON.stringify(serviceOrders);
             console.log('supervisorReport', service);
 
-            sendMail()
+            sendMail(service)
               .then((result) => console.log('Email sent...', result))
               .catch((error) => console.log(error.message));
 

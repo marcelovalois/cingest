@@ -1,10 +1,14 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import routes from './routes.js';
+import routes from './routes';
 import mongoose from 'mongoose';
 
 const connectionString = 'mongodb+srv://cingest:senhaMongo1234@cingest.pooile3.mongodb.net/?retryWrites=true&w=majority'
+
+interface ErrorWithStatus extends Error {
+    status?: number;
+}
 
 const app = express();
 
@@ -26,8 +30,8 @@ app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 //not found
-app.use((req, res, next) => {
-    const error = new Error('Not found');
+app.use((req: Request, res: Response, next: NextFunction) => {
+    const error = new Error('Not found') as ErrorWithStatus;
     error.status = 404
     next(error)
 })
